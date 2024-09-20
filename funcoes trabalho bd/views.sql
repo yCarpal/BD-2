@@ -1,4 +1,5 @@
 ---View 
+--LEONARDO CUTRIM E PAULO OLIVEIRA
 
 --1. Produtos em Estoque por Loja
 CREATE VIEW ProdutosEmEstoque AS

@@ -1,5 +1,5 @@
 --BD 2
-
+--LEONARDO CUTRIM E PAULO OLIVEIRA
 
 --1. Clientes com Crediário em Atraso
 SELECT cl.nome AS cliente, cr.saldo_devedor, pc.data_vencimento
