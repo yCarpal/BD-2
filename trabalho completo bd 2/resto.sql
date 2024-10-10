@@ -48,7 +48,7 @@ JOIN Produto p ON e.produto_id = p.produto_id;
 -- 3. View para crediário de clientes com saldo devedor
 CREATE VIEW view_crediario_clientes AS
 SELECT c.nome AS cliente, cr.limite_credito, cr.saldo_devedor
-FROM Crediario cr
+FROM Crediario cr-
 JOIN Cliente c ON cr.cliente_id = c.cliente_id;
 
 -- 4. View para pedidos de reposição
@@ -57,7 +57,7 @@ SELECT pr.pedido_id, f.nome AS fornecedor, pr.situacao, pr.valor
 FROM PedidoReposicao pr
 JOIN Fornecedor f ON pr.fornecedor_id = f.fornecedor_id;
 
---- STORED PRCEDURES
+-- STORED PRCEDURES
 -- 1. Stored Procedure para inserir um novo produto
 CREATE OR REPLACE PROCEDURE sp_inserir_produto(
     p_nome dom_varchar_40,
@@ -125,7 +125,7 @@ END;
 $$;
 
 --- FUNCTIONS
-
+---Paulo Junior Gomes e Leonardo Cutrim
 -- 1. Function para calcular o total vendido de um produto
 CREATE OR REPLACE FUNCTION fn_total_vendido_produto(p_produto_id INTEGER)
 RETURNS dom_decimal AS $$
