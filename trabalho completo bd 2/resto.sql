@@ -86,6 +86,8 @@ BEGIN
 END;
 $$;
 
+--- 3.stored procedure para registrar as cobrancas de um crediario
+
 CREATE PROCEDURE sp_registrar_cobranca(
     p_crediario_id INTEGER,
     p_funcionario_id INTEGER,
@@ -99,6 +101,8 @@ BEGIN
 END;
 $$;
 
+--- 4. Stored procedures para adiconar cliente no sistema
+
 CREATE OR REPLACE PROCEDURE sp_adicionar_cliente(
     p_nome dom_varchar_40,
     p_cpf dom_varchar_14,
@@ -111,6 +115,8 @@ BEGIN
     VALUES (p_nome, p_cpf, p_email, p_telefone, CURRENT_TIMESTAMP);
 END;
 $$;
+
+--- 5. Stored procedures para atualizar o limete do cliente
 
 CREATE OR REPLACE PROCEDURE sp_atualizar_limite_credito(
     p_cliente_id INTEGER,
@@ -154,6 +160,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+--- 3. Function para falar o total de pedido para reposição
+
 CREATE OR REPLACE FUNCTION fn_total_pedido_reposicao(p_pedido_id INTEGER)
 RETURNS dom_decimal AS $$
 DECLARE
@@ -166,6 +174,8 @@ BEGIN
     RETURN COALESCE(total_pedido, 0);
 END;
 $$ LANGUAGE plpgsql;
+
+--- 4. Function para mostrar o limite disponivel do cliente
 
 CREATE OR REPLACE FUNCTION fn_limite_credito_disponivel(p_cliente_id INTEGER)
 RETURNS dom_decimal AS $$
@@ -180,6 +190,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+--- 5. Function para mostrar a quantidade de produtos nos estoques
 CREATE OR REPLACE FUNCTION fn_estoque_produto_loja(p_produto_id INTEGER, p_loja_id INTEGER)
 RETURNS dom_decimal AS $$
 DECLARE
@@ -229,6 +240,8 @@ AFTER INSERT ON ItemVenda
 FOR EACH ROW
 EXECUTE FUNCTION fn_atualizar_estoque_venda();
 
+---3 trigger para atualizar os status de cobrança
+
 CREATE OR REPLACE FUNCTION fn_atualizar_status_cobranca()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -246,6 +259,8 @@ BEFORE UPDATE ON Cobranca
 FOR EACH ROW
 EXECUTE FUNCTION fn_atualizar_status_cobranca();
 
+----4 verificar o saldo do crediario
+
 CREATE OR REPLACE FUNCTION fn_verificar_saldo_crediario()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -256,6 +271,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+--- 5. Trigger para verificar o saldo do crediario 
 CREATE TRIGGER trg_verificar_saldo_crediario
 BEFORE UPDATE ON Crediario
 FOR EACH ROW
@@ -271,6 +287,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+--- 5 atualizar o total de vendas 
 CREATE TRIGGER trg_atualizar_total_vendas
 AFTER INSERT ON ItemVenda
 FOR EACH ROW
