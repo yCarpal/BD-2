@@ -49,8 +49,8 @@ CREATE TABLE Fornecedor (
     endereco dom_texto
 );
 
--- Tabela Loja
-CREATE TABLE Loja (
+-- Tabela lojas
+CREATE TABLE Lojas (
     loja_id SERIAL PRIMARY KEY,
     nome dom_descricao NOT NULL,
     endereco dom_texto,
@@ -65,7 +65,7 @@ CREATE TABLE Funcionario (
     telefone dom_telefone,
     cargo dom_nome,
     loja_id INTEGER NOT NULL,
-    FOREIGN KEY (loja_id) REFERENCES Loja(loja_id)
+    FOREIGN KEY (loja_id) REFERENCES lojas(loja_id)
 );
 
 -- Tabela Estoque
