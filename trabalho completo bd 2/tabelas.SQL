@@ -1,6 +1,6 @@
 -- Criação dos Domínios
 
-CREATE DOMAIN dom_nome AS VARCHAR(40),  
+CREATE DOMAIN dom_nome AS VARCHAR(40);
 CREATE DOMAIN dom_email AS VARCHAR(50);  
 CREATE DOMAIN dom_descricao AS VARCHAR(100);  
 CREATE DOMAIN dom_telefone AS VARCHAR(20);  
